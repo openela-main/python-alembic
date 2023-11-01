@@ -1,0 +1,31 @@
+From 1a4a106bf202fbd90371087260af2bbc0ef097c3 Mon Sep 17 00:00:00 2001
+From: Tomas Hrnciar <thrnciar@redhat.com>
+Date: Thu, 3 Jun 2021 15:20:04 +0200
+Subject: [PATCH] filter out DeprecationWarnings
+
+---
+ alembic/testing/warnings.py | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/alembic/testing/warnings.py b/alembic/testing/warnings.py
+index d809dfe..ae8bcec 100644
+--- a/alembic/testing/warnings.py
++++ b/alembic/testing/warnings.py
+@@ -30,3 +30,14 @@ def setup_filters():
+         warnings.filterwarnings(
+             "once", category=pytest.PytestDeprecationWarning
+         )
++    warnings.filterwarnings(
++        "ignore",
++        category=DeprecationWarning,
++        message="SelectableGroups dict interface is deprecated. Use select.",
++    )
++    warnings.filterwarnings(
++        "ignore",
++        category=DeprecationWarning,
++        message="The distutils package is deprecated and slated for removal in Python 3.12. Use setuptools or check PEP 632 for potential alternatives",
++    )
++
+-- 
+2.31.1
+
